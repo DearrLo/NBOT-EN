@@ -2,55 +2,63 @@ const { Client, GatewayIntentBits, REST, Routes } = require('discord.js');
 const axios = require('axios');
 require('dotenv').config();
 
-const discordToken = process.env.DISCORD_TOKEN;  // Récupérer le token du bot depuis le fichier .env (nom de variable corrigé)
+const discordToken = process.env.DISCORD_TOKEN;  
 const apiKey = process.env.WEATHER_TOKEN; 
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
-// !! BASIQUE STUFF !!
 
-// Instance REST pour enregistrer les commandes slash
-const rest = new REST({ version: '10' }).setToken(discordToken);  // Utiliser discordToken (majuscule)
 
-// Commandes slash (enregistre "/météo" et "/help")
+
+// !! BASIC STUFF !!
+
+// Instance REST for registrer the slash commands
+const rest = new REST({ version: '10' }).setToken(discordToken);  
+
+// slash commands (for now only "weather" and "help"))
 const commands = [
   {
     name: 'help',
-    description: 'Affiche les commandes disponibles.',
+    description: 'Show the available commands.',
   },
   {
-    name: 'météo',
-    description: 'Affiche la météo d\'une ville',
+    name: 'weather',
+    description: 'Show the weather of a given city',
     options: [
       {
-        name: 'ville',
+        name: 'city',
         type: 3,
-        description: 'Nom de la ville dont vous voulez connaître la météo',
+        description: 'Name of the city you wanna know the weather of',
         required: true,
       }
     ]
   }
 ];
 
-// Enregistrer les commandes slash sur ton serveur
+
+// Register de / commands on the serveur 
+
 (async () => {
   try {
-    console.log('Début de l\'enregistrement des commandes slash.');
-    await rest.put(Routes.applicationGuildCommands('1291301242533974037', '1150709577139097750'), { body: commands });
-    console.log('Les commandes slash ont été enregistrées avec succès.');
+    console.log('Starting to record the slash\'s commands.');
+    await rest.put(
+      Routes.applicationCommands('1291301242533974037'),
+      { body: commands }
+  );
+    console.log('Slash\'s Command realised with sucess.');
   } catch (error) {
     console.error(error);
   }
 })();
 
 
-// Quand le bot est prêt
+// Startting the BOT and make it say it when it's ready :
 client.once('ready', () => {
   console.log('Agent Romanoff, reporting for duty !');
 });
 
 
-// !! COMMANDES HELP et MÉTÉO !!
+// !! Commands help and weather !!
 
 client.on('interactionCreate', async interaction => {
   if (!interaction.isCommand()) return;
@@ -60,42 +68,41 @@ client.on('interactionCreate', async interaction => {
     await interaction.reply('Here\'s everything i\'m capable of... and more much will come. ;) \n- /help : Affiche cette aide\n- /météo "ville") : permets de savoir si tu dois t\'habiller (ou non) chaudement pour moi...');
   }
 
-  // Commande /météo NOMVILLE
-  if (interaction.commandName === 'météo') {
-    const ville = interaction.options.getString('ville'); // Récupérer le nom de la ville
-    if (!ville) {
+  // Commande /weather NameOfTheCity
+  if (interaction.commandName === 'weather') {
+    const city = interaction.options.getString('city'); 
+    if (!city) {
       await interaction.reply('Please, gimme a correct city honey, i still cannot guess for you...!');
       return;
     }
 
-     // Requête à l'API OpenWeatherMap pour récupérer la météo de la ville
+     // here's just the api's weather for permit him to interract with
      const url = `https://api.openweathermap.org/data/2.5/weather?q=${ville}&appid=${apiKey}&units=metric&lang=fr`;
 
      try {
         const response = await axios.get(url);
         const data = response.data;
         
-        // Extraire les informations utiles de la réponse
+        // here's we parameter the exact information we want the BOT to extract via the website
         const description = data.weather[0].description;
         const temperature = data.main.temp;
         const feels_like = data.main.feels_like;
         const humidity = data.main.humidity;
   
-        // Répondre avec les informations météo
+        // here's the BOT is replying
         await interaction.reply(`Météo à **${ville}** :\nDescription : ${description}\nTempérature : ${temperature}°C (ressenti ${feels_like}°C)\nHumidité : ${humidity}%`);
       } catch (error) {
-        // Gérer les erreurs, par exemple si la ville n'est pas trouvée
+        // managing the errors
         await interaction.reply('Sorry, I wasn\'t able to find the meteorological informations for this city, please double check the name and try again.');
       }
   }
 });
 
 
-// !! Spécifiques stuff !!
+// !! Specific stuff !!
 
-// Écouter les messages envoyés dans les canaux texte par tous les utilisateurs
 client.on('messageCreate', message => {
-    // Ignorer les messages du bot lui-même
+    // ignore the message if it's the BOT itself who say it :
     if (message.author.bot) return;
 
     // FR FR FR FR FR convertir le message en minuscule pour que la vérification soit insensible à la casse
