@@ -32,6 +32,8 @@ const commands = [
   }
 ];
 
+
+
 // Register the slash commands on the server
 (async () => {
   try {
@@ -50,6 +52,12 @@ const commands = [
 client.on('ready', () => {
   console.log('Agent Romanoff, reporting for duty!');
 });
+
+
+
+
+
+
 
 // !! Commands help and weather !!
 
@@ -97,6 +105,12 @@ client.on('interactionCreate', async interaction => {
   }
 });
 
+
+
+
+
+
+
 // !! Specific stuff !!
 
 client.on('messageCreate', message => {
@@ -111,13 +125,13 @@ client.on('messageCreate', message => {
     '{username}! It\'s the last time I\'m telling you! Your L A N G U A G E!'
   ];
 
-  // Check if the message contains an insult
-  if (userMessage.includes('fuck') || userMessage.includes('shit') || userMessage.includes('shut up') || userMessage.includes('ta gueule') || userMessage.includes('fucking') || userMessage.includes('motherfucker') || userMessage.includes('jfc') || userMessage.includes('asshole') || userMessage.includes('cunt') || userMessage.includes('debile') || userMessage.includes('idiot')) {
-    let NoInsultes = randomNoInsultes[Math.floor(Math.random() * randomNoInsultes.length)];
-    NoInsultes = NoInsultes.replace('{username}', message.author.username);
-    message.reply(NoInsultes);
-    return;
-  }
+    // Check if the message contains an insult
+    if (userMessage.includes('fuck') || userMessage.includes('shit') || userMessage.includes('bitch') || userMessage.includes('shut up') || userMessage.includes('ta gueule') || userMessage.includes('fucking') || userMessage.includes('motherfucker') || userMessage.includes('jfc') || userMessage.includes('asshole') || userMessage.includes('cunt') || userMessage.includes('debile') || userMessage.includes('idiot')) {
+      let NoInsultes = randomNoInsultes[Math.floor(Math.random() * randomNoInsultes.length)];
+      NoInsultes = NoInsultes.replace('{username}', message.author.username);
+      message.reply(NoInsultes);
+      return;
+    }
 
   // Mistakes responses 
   const mistakeRandom = [
@@ -184,7 +198,7 @@ client.on('messageCreate', message => {
     return;
   }
 
-  // There's too many characters replies
+  // There's too many caracters replies
   const maxLength = 60;
 
   if (message.content.length > maxLength) {
@@ -201,8 +215,10 @@ client.on('messageCreate', message => {
     ];
 
     const randomBothered = botheredRandom[Math.floor(Math.random() * botheredRandom.length)];
-    message.reply(randomBothered);
+    message.reply(randomBothered.replace('{username}', message.author.username));
+    return;
   }
+
 
   // Compliments replies
   const complimentRandom = [
@@ -216,13 +232,15 @@ client.on('messageCreate', message => {
     'Wow, thanks. Try not to faint.'
   ];
 
-  if (userMessage.includes('beautiful natasha') || userMessage.includes('beautiful nat') || userMessage.includes('beautiful agent') || userMessage.includes('hot nat') || userMessage.includes('hot natasha') || userMessage.includes('hot agent') || userMessage.includes('amazing tasha') || userMessage.includes('amazing agent') || userMessage.includes('amazing natasha') || userMessage.includes('smart agent') || userMessage.includes('smart natasha') || userMessage.includes('smart nat') || userMessage.includes('georgous natasha') || userMessage.includes('georgous agent') || userMessage.includes('pretty natasha') || userMessage.includes('pretty agent') || userMessage.includes('perfect') || userMessage.includes('perfect tasha') ||userMessage.includes('most beautiful')) {
+  if (userMessage.includes('beautiful natasha') || userMessage.includes('beautiful nat') || userMessage.includes('beautiful agent') || userMessage.includes('pretty') || userMessage.includes('not only pretty') || userMessage.includes('hot nat') || userMessage.includes('hot natasha') || userMessage.includes('hot agent') || userMessage.includes('amazing tasha') || userMessage.includes('amazing agent') || userMessage.includes('amazing natasha') || userMessage.includes('smart agent') || userMessage.includes('smart natasha') || userMessage.includes('smart nat') || userMessage.includes('georgous natasha') || userMessage.includes('georgous agent') || userMessage.includes('pretty natasha') || userMessage.includes('pretty agent') || userMessage.includes('perfect') || userMessage.includes('perfect tasha') ||userMessage.includes('most beautiful')) {
     const randomCompliment = complimentRandom[Math.floor(Math.random() * complimentRandom.length)];
     message.reply(randomCompliment);
     return;
   }
 
-  // Greetings responses
+
+
+  // salutations responses
   const salutations = [
     'Hello to you too, {username}. How are you doing?',
     '*Nods* {username}. It\'s good to see you too, pal.',
@@ -245,10 +263,12 @@ client.on('messageCreate', message => {
   if (userMessage.includes('sup tasha') || userMessage.includes('how are you agent') ||  userMessage.includes('how are you') || userMessage.includes('i\'m good and you') || userMessage.includes('are you ok nat') || userMessage.includes('wassup') || userMessage.includes('how are you doing')) {
     const randomIamDoingWell = IamDoingWell[Math.floor(Math.random() * IamDoingWell.length)];
     message.reply(randomIamDoingWell);
-  } else if (userMessage.includes('bonjour') || userMessage.includes('yo') || userMessage.includes('hello') || userMessage.includes('hi') || userMessage.includes('hey')) {
-    let randomSalutation = salutations[Math.floor(Math.random() * salutations.length)];
-    randomSalutation = randomSalutation.replace('{username}', message.author.username);
-    message.reply(randomSalutation);
+}
+  if (userMessage.includes('bonjour') || userMessage.includes('yo') || userMessage.includes('hello') || 
+  userMessage.includes('hi') || userMessage.includes('hey')) {
+let randomSalutation = salutations[Math.floor(Math.random() * salutations.length)];
+randomSalutation = randomSalutation.replace('{username}', message.author.username);
+message.reply(randomSalutation);
   }
 });
 
