@@ -136,7 +136,9 @@ const { handleCompliments}  = require ('./Dials/compliments');
 const { handleIamDoingWell } = require ('./Dials/doingWell');
 const { handleDrama } = require ('./Dials/drama');
 const { handleLongMessages } = require ('./Dials/longMessages');
-const { handle}
+const { handleMistakes } = require ('./Dials/mistakes');
+const { handleRewards } = require ('./Dials/reward');
+const { handleRewards } = require ('./Dials/salutations');
 
 // Connexion du client avec le token du bot
 client.login(discordToken);
