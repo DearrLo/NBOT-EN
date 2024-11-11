@@ -6,16 +6,15 @@ const discordToken = process.env.DISCORD_TOKEN;
 const apiKey = process.env.WEATHER_TOKEN; 
 
 
-
-// Importation des fonctions des autres fichiers
-const { handleInsults } = require('.//Dials/antiInsults');
-const { handleCompliments } = require('.//Dials/compliments');
-const { handleIamDoingWell } = require('.//Dials/doingWell');
-const { handleDrama } = require('.//Dials/drama');
-const { handleLongMessages } = require('.//Dials/longMessages');
-const { handleErreurs } = require('.//Dials/mistakes');
-const { handleRewards } = require('.//Dials/reward');
-const { handleSalutations } = require('.//Dials/salutations');
+// Importation of the functions
+const { handleAntiInsultes } = require('./Dials/antiInsults');
+const { handleCompliments}  = require ('./Dials/compliments');
+const { handleIamDoingWell } = require ('./Dials/doingWell');
+const { handleDrama } = require ('./Dials/drama');
+const { handleLongMessages } = require ('./Dials/longMessages');
+const { handleMistakes } = require ('./Dials/mistakes');
+const { handleRewards } = require ('./Dials/reward');
+const { handleRewards } = require ('./Dials/salutations');
 
 
 
@@ -130,15 +129,6 @@ client.on('messageCreate', message => {
   handleSalutations(message);
 });
 
-// Importation of the functions
-const { handleAntiInsultes } = require('./Dials/antiInsults');
-const { handleCompliments}  = require ('./Dials/compliments');
-const { handleIamDoingWell } = require ('./Dials/doingWell');
-const { handleDrama } = require ('./Dials/drama');
-const { handleLongMessages } = require ('./Dials/longMessages');
-const { handleMistakes } = require ('./Dials/mistakes');
-const { handleRewards } = require ('./Dials/reward');
-const { handleRewards } = require ('./Dials/salutations');
 
 // Connexion du client avec le token du bot
 client.login(discordToken);
