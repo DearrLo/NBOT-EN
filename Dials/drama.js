@@ -19,4 +19,4 @@ function handleDrama(message) {
     }
   }
   
-  module.exports = { handleErreurs, handleRewards, handleSalutations, handleIamDoingWell, handleDrama };
+  module.exports = { handleDrama };

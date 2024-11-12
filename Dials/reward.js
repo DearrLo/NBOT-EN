@@ -23,4 +23,4 @@ function handleRewards(message) {
     }
   }
 
-  module.exports = { handleSalutations };
+  module.exports = { handleRewards };

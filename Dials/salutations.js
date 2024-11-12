@@ -21,4 +21,4 @@ function handleSalutations(message) {
     }
   }
   
-  module.exports = { handleErreurs, handleRewards, handleSalutations };
+  module.exports = { handleSalutations };

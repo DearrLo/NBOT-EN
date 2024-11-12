@@ -15,4 +15,4 @@ function handleIamDoingWell(message) {
     }
   }
   
-  module.exports = { handleErreurs, handleRewards, handleSalutations, handleIamDoingWell };
+  module.exports = { handleIamDoingWell };

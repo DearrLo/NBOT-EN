@@ -19,4 +19,4 @@ function handleCompliments(message) {
     }
   }
   
-  module.exports = { handleErreurs, handleRewards, handleSalutations, handleIamDoingWell, handleDrama, handleLongMessages, handleCompliments };
+  module.exports = { handleCompliments };

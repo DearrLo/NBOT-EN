@@ -1,9 +1,12 @@
+require('dotenv').config();
 const { Client, GatewayIntentBits, REST, Routes } = require('discord.js');
 const axios = require('axios');
-require('dotenv').config();
 
 const discordToken = process.env.DISCORD_TOKEN;  
 const apiKey = process.env.WEATHER_TOKEN; 
+
+console.log("Discord Token:", discordToken);
+
 
 
 // Importation of the functions
@@ -14,7 +17,7 @@ const { handleDrama } = require ('./Dials/drama');
 const { handleLongMessages } = require ('./Dials/longMessages');
 const { handleMistakes } = require ('./Dials/mistakes');
 const { handleRewards } = require ('./Dials/reward');
-const { handleRewards } = require ('./Dials/salutations');
+const { handleSalutations } = require('./Dials/salutations');
 
 
 
