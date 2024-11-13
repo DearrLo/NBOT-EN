@@ -9,8 +9,8 @@
 
 function handleIamDoingWell(message) {
     const userMessage = message.content.toLowerCase();
-    if (userMessage.includes('how are you') || userMessage.includes('how are you doing') || userMessage.includes('are you ok') || userMessage.includes('are you alright')) {
-      const randomIamDoingWell = iamDoingWell[Math.floor(Math.random() * iamDoingWell.length)];
+    if (userMessage.includes('how are you') || userMessage.includes('how are you doing') || userMessage.includes('are you ok') || userMessage.includes('how are u') || userMessage.includes('sup') ||  userMessage.includes('are you alright')) {
+      const randomIamDoingWell = IamDoingWell[Math.floor(Math.random() * IamDoingWell.length)];
       message.reply(randomIamDoingWell);
     }
   }
