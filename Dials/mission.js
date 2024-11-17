@@ -16,7 +16,7 @@ function handleMission(interaction) {
     const randomMission = missions[Math.floor(Math.random() * missions.length)];
     
     // reply to the user with the selected mission
-    interaction.reply(`Your mission, should you choose to accept it: ${randomMission}`);
+    interaction.reply(`Your mission, should you choose to accept it.. or not : ${randomMission}`);
 }
 
 module.exports = { handleMission };

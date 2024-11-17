@@ -30,21 +30,21 @@ const commands = [
   },
   {
     name: 'mission',
-    description: 'You would like to give me a mission? Well, it\'s the place to be!'
+    description: 'You received a new mission from Agent Romanoff!'
   }
 ];
 
-// Function to register slash commands on DC
+// Function to register slash commands on Discord
 async function registerCommands(clientId) {
   try {
     console.log('Starting to record the slash commands.');
     await rest.put(
-      Routes.applicationCommands(1291301242533974037), 
+      Routes.applicationCommands(clientId),
       { body: commands }
     );
     console.log('Slash commands registered successfully.');
   } catch (error) {
-    console.error(error);
+    console.error('Error registering slash commands:', error);
   }
 }
 
@@ -92,13 +92,13 @@ async function handleSlashCommands(interaction) {
     }
   }
 
-  // command for /mission
+  // Command /mission
   if (interaction.commandName === 'mission') {
     handleMission(interaction);
   }
 }
 
-// import handle mission
+// Import handleMission from mission.js
 const { handleMission } = require('./Dials/mission');
 
 module.exports = { registerCommands, handleSlashCommands };
