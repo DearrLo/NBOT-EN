@@ -1,4 +1,4 @@
-// Import necessary modules
+// Necessary moduls that we need import first
 const { REST, Routes } = require('discord.js');
 const axios = require('axios');
 require('dotenv').config();
@@ -65,7 +65,7 @@ async function handleSlashCommands(interaction) {
       return;
     }
 
-    // URL for weather API
+    // URL for the weather's API
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=fr`;
 
     try {
