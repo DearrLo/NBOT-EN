@@ -18,22 +18,24 @@ function handleSalutations(message) {
 
   if (userMessage.includes('bonjour') || userMessage.includes('hello') || userMessage.includes('hi') || userMessage.includes('yo') || userMessage.includes('hey')) {
     try {
-      // Sélectionne une salutation aléatoire
+
+      // Pick a random salutation
       const randomSalutation = salutations[Math.floor(Math.random() * salutations.length)];
       const textWithUsername = randomSalutation.text.replace('{username}', message.author.username);
 
-      // Crée un chemin vers l'image en local
+      // CReate a local path for the pic
       const imagePath = path.join(__dirname, '../Images/relatedtoSalutations', randomSalutation.image);
       console.log("Image Path:", imagePath); // Debugging log pour vérifier le chemin
 
-      // Crée un attachment avec l'image
+      // Create the attacment with the pic
       const attachment = new AttachmentBuilder(imagePath);
 
-      // Répond au message avec le texte et l'image attachée
+      // reply with text + pic
       message.reply({ content: textWithUsername, files: [attachment] });
       
     } catch (error) {
-      // Gestion des erreurs
+
+      // For catching errors
       console.error('Error sending message with attachment:', error);
       message.reply('Sorry, something went wrong when trying to send an image.');
     }
