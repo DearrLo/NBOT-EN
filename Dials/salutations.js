@@ -23,7 +23,7 @@ function handleSalutations(message) {
       const randomSalutation = salutations[Math.floor(Math.random() * salutations.length)];
       const textWithUsername = randomSalutation.text.replace('{username}', message.author.username);
 
-      // CReate a local path for the pic
+      // Create a local path for the pic
       const imagePath = path.join(__dirname, '../Images/relatedtoSalutations', randomSalutation.image);
       console.log("Image Path:", imagePath); // Debugging log pour vérifier le chemin
 
