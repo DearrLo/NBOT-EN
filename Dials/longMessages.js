@@ -19,18 +19,17 @@ function handleLongMessages(message) {
 
   if (message.content.length > maxLength) {
     try {
-      // Sélectionne une réponse aléatoire depuis botheredRandom
+      //Select a random answer in botheredRandom
       const randomBothered = botheredRandom[Math.floor(Math.random() * botheredRandom.length)];
       const textWithUsername = randomBothered.text.replace('{username}', message.author.username);
 
-      // Crée un chemin vers l'image en local
+      // Create a local path
       const imagePath = path.join(__dirname, '../Images/relatedtoOther', randomBothered.image);
-      console.log("Image Path:", imagePath); // Debugging log pour vérifier le chemin
 
-      // Crée un attachment avec l'image
+      // Create an attachment
       const attachment = new AttachmentBuilder(imagePath);
 
-      // Répond au message avec le texte et l'image attachée
+      // Reply to the user with the text + picture
       message.reply({ content: textWithUsername, files: [attachment] });
     } catch (error) {
       // Gestion des erreurs

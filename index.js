@@ -5,6 +5,7 @@ const { Client, GatewayIntentBits } = require('discord.js');
 const { registerCommands, handleSlashCommands } = require('./commands');
 
 // this is the functions for the handling chat with the bot
+const { handleAJoke } = require('./Dials/joke');
 const { handleAntiInsultes } = require('./Dials/antiInsults');
 const { handleCompliments } = require('./Dials/compliments');
 const { handleIamDoingWell } = require('./Dials/doingWell');
@@ -26,6 +27,8 @@ const client = new Client({
   ]
 });
 
+
+
 // !! BASIC STUFF !!
 
 // Registering slash commands
@@ -37,6 +40,7 @@ const client = new Client({
     console.error("Error registering slash commands:", error);
   }
 })();
+
 
 // !! COMMANDS HELP AND WEATHER (and soon more) !!
 
@@ -54,7 +58,10 @@ client.on('interactionCreate', async interaction => {
 client.on('messageCreate', message => {
   if (message.author.bot) return;
 
+
+
   // Calling specific functions for each type of response
+  handleAJoke(message);
   handleAntiInsultes(message);
   handleCompliments(message);
   handleIamDoingWell(message);
